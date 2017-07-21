@@ -2,17 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class Card extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      completeStatus: false
+    };
+  }
   render(){
+    let completeButton;
+    if(!this.state.completeStatus){
+      completeButton = <button className ="complete-card" onClick = {this._markComplete.bind(this)}>></button>;
+    }
+
     return(
             <div className ="card">
               <div className ="title">{this.props.title}</div>
               <div className ="description">{this.props.description}</div>
               <div className ="actions">
                 <button className ="delete-card">X</button>
-                <button className ="complete-card">></button>
+                {completeButton}
               </div>
             </div>
     );
+  }
+  _markComplete(){
+    this.setState({completeStatus: true});
   }
 }
 class CardColumn extends React.Component {
