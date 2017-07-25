@@ -5,21 +5,25 @@ class Card extends React.Component {
   constructor(){
     super();
     this.state={
-      completeStatus: false
+      completeStatus: false, archiveStatus: false
     };
   }
   render(){
     let completeButton;
     if(!this.state.completeStatus){
       completeButton = <button className ="complete-card" onClick = {this._markComplete.bind(this)}>></button>;
-    }
+    };
+    let archiveButton;
+    if(!this.state.archiveStatus){
+      archiveButton = <button className ="delete-card" onClick = {this._markArchive.bind(this)}>></button>
+      };
 
     return(
             <div className ="card">
               <div className ="title">{this.props.title}</div>
               <div className ="description">{this.props.description}</div>
               <div className ="actions">
-                <button className ="delete-card">X</button>
+                {archiveButton}
                 {completeButton}
               </div>
             </div>
@@ -27,7 +31,10 @@ class Card extends React.Component {
   }
   _markComplete(){
     this.setState({completeStatus: true});
-  }
+  };
+  _markArchive(){
+    this.setState({archiveStatus: true});
+  };
 }
 class CardColumn extends React.Component {
   _getCards(){
